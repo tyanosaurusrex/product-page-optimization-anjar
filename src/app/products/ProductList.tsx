@@ -21,6 +21,7 @@ export default function ProductList({
   async function changeCategoryHandler (category: string) {
     console.log("category selected", category)
     setSelectedCategory(category)
+    setSortOrder("")
 
     const fetchProducts = await getProductsByCategory(category)
     setProducts(fetchProducts.products)
@@ -29,6 +30,7 @@ export default function ProductList({
   async function sortPriceHandler (order: string) {
     console.log("sort option selected", order)
     setSortOrder(order)
+    setSelectedCategory("")
 
     const fetchProducts = await getProductSortByPrice(order)
     setProducts(fetchProducts.products)
