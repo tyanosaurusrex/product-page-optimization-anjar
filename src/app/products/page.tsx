@@ -16,7 +16,7 @@ export default async function ProductListPage() {
     <>
       {/* Filter & Sort */}
       <div className="flex gap-4 mb-6">
-        <select className="border rounded px-3 py-2" onChange={}>
+        <select className="border rounded px-3 py-2" >
           <option>All Categories</option>
           {categories.map((category: string) => (
             <option>{category}</option>

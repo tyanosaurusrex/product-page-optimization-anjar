@@ -14,7 +14,8 @@ export async function getProducts(): Promise<FetchProductsResponse> {
   return res.json()
 }
 
-export async function getProductsById(id: number): Promise<Product> {
+export async function getProductById(id: number): Promise<Product> {
+  console.log("ID nya", `${BASE_URL}/products/${id}`)
   const res = await fetch(`${BASE_URL}/products/${id}`)
 
   if (!res.ok) {
