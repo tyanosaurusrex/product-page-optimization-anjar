@@ -25,11 +25,21 @@ export async function getProductById(id: number): Promise<Product> {
   return res.json()
 }
 
-export async function getProductsByCategories(category: string): Promise<FetchProductsResponse> {
+export async function getProductsByCategory(category: string): Promise<FetchProductsResponse> {
   const res = await fetch(`${BASE_URL}/products/category/${category}`)
 
   if (!res.ok) {
     throw new Error("Product with category selected not found")
+  }
+
+  return res.json()
+}
+
+export async function getProductSortByPrice(order: string): Promise<FetchProductsResponse> {
+  const res = await fetch(`${BASE_URL}/products?sortBy=price&order=${order}`)
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products")
   }
 
   return res.json()

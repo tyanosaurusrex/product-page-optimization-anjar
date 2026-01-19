@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { getProductsByCategories } from "@/src/lib/api"
+import { getProductsByCategory, getProductSortByPrice } from "@/src/lib/api"
 import { Product } from "@/src/types/product"
 import ProductCard from "../components/ProductCard"
 
@@ -16,12 +16,21 @@ export default function ProductList({
 }: Props) {
   const [products, setProducts] = useState<Product[]>(initialProducts)
   const [selectedCategory, setSelectedCategory] = useState("")
+  const [sortOrder, setSortOrder] = useState("")
 
   async function changeCategoryHandler (category: string) {
     console.log("category selected", category)
     setSelectedCategory(category)
 
-    const fetchProducts = await getProductsByCategories(category)
+    const fetchProducts = await getProductsByCategory(category)
+    setProducts(fetchProducts.products)
+  }
+
+  async function sortPriceHandler (order: string) {
+    console.log("sort option selected", order)
+    setSortOrder(order)
+
+    const fetchProducts = await getProductSortByPrice(order)
     setProducts(fetchProducts.products)
   }
 
@@ -43,6 +52,30 @@ export default function ProductList({
             </option>
           ))}
         </select>
+
+        <select
+          value={sortOrder}
+          onChange={(e) => {
+            const order = e.target.value;
+            sortPriceHandler(order)
+          }}
+          className="border rounded px-3 py-2"
+        >
+          <option>Default</option>
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+
+        <button
+          onClick={() => {
+            setSelectedCategory("")
+            setProducts(initialProducts)
+            setSortOrder("")
+          }}
+          className="border rounded px-3 py-2 bg-gray-100 hover:bg-gray-200"
+        >
+          Reset
+        </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
