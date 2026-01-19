@@ -26,7 +26,7 @@ export async function getProductById(id: number): Promise<Product> {
 }
 
 export async function getProductsByCategories(category: string): Promise<FetchProductsResponse> {
-  const res = await fetch(`${BASE_URL}/products/${category}`)
+  const res = await fetch(`${BASE_URL}/products/category/${category}`)
 
   if (!res.ok) {
     throw new Error("Product with category selected not found")
