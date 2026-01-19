@@ -5,7 +5,9 @@ import { Product } from "../types/product"
 const BASE_URL = "https://dummyjson.com"
 
 export async function getProducts(): Promise<FetchProductsResponse> {
-  const res = await fetch(`${BASE_URL}/products`)
+  const res = await fetch(`${BASE_URL}/products`, {
+    cache: "force-cache"
+  })
 
   if (!res.ok) {
     throw new Error("Failed to fetch products")
@@ -15,8 +17,9 @@ export async function getProducts(): Promise<FetchProductsResponse> {
 }
 
 export async function getProductById(id: number): Promise<Product> {
-  console.log("ID nya", `${BASE_URL}/products/${id}`)
-  const res = await fetch(`${BASE_URL}/products/${id}`)
+  const res = await fetch(`${BASE_URL}/products/${id}`, {
+    cache: "force-cache"
+  })
 
   if (!res.ok) {
     throw new Error("Product not found")
@@ -26,7 +29,9 @@ export async function getProductById(id: number): Promise<Product> {
 }
 
 export async function getProductsByCategory(category: string): Promise<FetchProductsResponse> {
-  const res = await fetch(`${BASE_URL}/products/category/${category}`)
+  const res = await fetch(`${BASE_URL}/products/category/${category}`, {
+    cache: "force-cache"
+  })
 
   if (!res.ok) {
     throw new Error("Product with category selected not found")
@@ -36,7 +41,9 @@ export async function getProductsByCategory(category: string): Promise<FetchProd
 }
 
 export async function getProductSortByPrice(order: string): Promise<FetchProductsResponse> {
-  const res = await fetch(`${BASE_URL}/products?sortBy=price&order=${order}`)
+  const res = await fetch(`${BASE_URL}/products?sortBy=price&order=${order}`, {
+    cache: "force-cache"
+  })
 
   if (!res.ok) {
     throw new Error("Failed to fetch products")
@@ -46,7 +53,9 @@ export async function getProductSortByPrice(order: string): Promise<FetchProduct
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const res = await fetch(`${BASE_URL}/products/category-list`)
+  const res = await fetch(`${BASE_URL}/products/category-list`, {
+    cache: "force-cache"
+  })
 
   if (!res.ok) {
     throw new Error("Failed to fetch categories")
